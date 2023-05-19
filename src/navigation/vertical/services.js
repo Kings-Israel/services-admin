@@ -2,6 +2,6 @@ export default [
   {
     title: 'Services',
     icon: 'ToolIcon',
-    route: 'dashboard-ecommerce',
+    route: 'apps-invoice-list',
   },
 ]

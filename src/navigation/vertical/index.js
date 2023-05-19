@@ -43,5 +43,5 @@ import formAndTable from './forms-and-table'
 export default [...dashboard,
   ...users,
   ...services,
-  // ...appsAndPages, ...uiElements, ...formAndTable, ...chartsAndMaps, ...others
+  // ...appsAndPages, ...uiElements, ...formAndTable, ...chartsAndMaps, ...others,
 ]

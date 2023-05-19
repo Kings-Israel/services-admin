@@ -2,6 +2,6 @@ export default [
   {
     title: 'Users',
     icon: 'UsersIcon',
-    route: 'dashboard-ecommerce',
+    route: 'apps-users-list',
   },
 ]

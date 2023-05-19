@@ -224,7 +224,6 @@ export default {
               user.ability = abilities
               user.role = role
               localStorage.setItem('userData', JSON.stringify(user))
-              console.log(user)
               this.$ability.update(abilities)
 
               // ? This is just for demo purpose. Don't think CASL is role based in this case, we used role in if condition just for ease
