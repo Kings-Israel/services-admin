@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-import createPersistedState from 'vuex-persistedstate'
-
 // Modules
 import ecommerceStoreModule from '@/views/apps/e-commerce/eCommerceStoreModule'
 import app from './app'
@@ -20,5 +17,4 @@ export default new Vuex.Store({
     'app-ecommerce': ecommerceStoreModule,
   },
   // strict: process.env.DEV,
-  plugins: [createPersistedState()],
 })
