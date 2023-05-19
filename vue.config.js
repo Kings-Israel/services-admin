@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   publicPath:
-    process.env.NODE_ENV === 'development' ? '/' : '',
+    process.env.NODE_ENV === 'development' ? '/' : '/services-admin',
   lintOnSave: false,
   devServer: {
     host: 'admin.services.test',
