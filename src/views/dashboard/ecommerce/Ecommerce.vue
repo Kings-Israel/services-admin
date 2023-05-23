@@ -71,7 +71,36 @@
                       Services
                     </h4>
                     <b-card-text class="font-small-3 mb-0">
-                      {{ users.length }}
+                      {{ services.length }}
+                    </b-card-text>
+                  </b-media-body>
+                </b-media>
+              </b-col>
+              <b-col
+                sm="6"
+                lg="3"
+              >
+                <b-media no-body>
+                  <b-media-aside
+
+                    class="mr-2"
+                  >
+                    <b-avatar
+                      size="48"
+                      variant="light-primary"
+                    >
+                      <feather-icon
+                        size="24"
+                        icon="BoxIcon"
+                      />
+                    </b-avatar>
+                  </b-media-aside>
+                  <b-media-body class="my-auto">
+                    <h4 class="font-weight-bolder mb-0">
+                      Categories
+                    </h4>
+                    <b-card-text class="font-small-3 mb-0">
+                      {{ categories.length }}
                     </b-card-text>
                   </b-media-body>
                 </b-media>
@@ -239,22 +268,46 @@ export default {
     return {
       data: {},
       users: [],
+      categories: [],
+      services: [],
     }
   },
-  async created() {
+  created() {
     // data
     this.$http.get('/ecommerce/data')
       .then(response => {
         this.data = response.data
       })
+  },
+  async mounted() {
     await this.$http.get('/admin/users')
       .then(response => {
         this.users = response.data.data
-        console.log(this.data.users.length)
       })
       .catch(error => {
         console.log(error)
       })
+    await this.$http.get('/categories')
+      .then(response => {
+        this.categories = response.data.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    await this.$http.get('/services')
+      .then(response => {
+        this.services = response.data.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    // await this.$http.get('/service/requests')
+    //   .then(response => {
+    //     console.log(response.data.data)
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
   },
 }
 </script>

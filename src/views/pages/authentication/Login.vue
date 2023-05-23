@@ -13,7 +13,7 @@
       <!-- Left Text-->
       <b-col
         lg="8"
-        class="d-none d-lg-flex align-items-center p-5"
+        class="d-none d-lg-flex align-items-center p-6"
       >
         <div class="w-75 d-lg-flex align-items-center justify-content-center px-4 mx-auto">
           <b-img
