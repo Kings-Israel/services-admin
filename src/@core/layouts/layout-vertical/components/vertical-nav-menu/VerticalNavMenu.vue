@@ -152,4 +152,7 @@ export default {
 
 <style lang="scss">
 @import "~@core/scss/base/core/menu/menu-types/vertical-menu.scss";
+// .navigation {
+//   font-family: "Lucida Console", "Courier New", monospace;
+// }
 </style>

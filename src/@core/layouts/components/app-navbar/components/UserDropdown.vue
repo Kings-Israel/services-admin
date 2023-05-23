@@ -7,7 +7,7 @@
     <template #button-content>
       <div class="d-sm-flex d-none user-nav">
         <p class="user-name font-weight-bolder mb-0">
-          {{ userData.name }}
+          {{ userData.first_name }} {{ userData.last_name }}
         </p>
       </div>
       <feather-icon

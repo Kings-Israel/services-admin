@@ -5,7 +5,112 @@
         xl="12"
         md="12"
       >
-        <ecommerce-statistics :data="data.statisticsItems" />
+        <b-card
+          v-if="data"
+          no-body
+          class="card-statistics"
+        >
+          <b-card-header>
+            <b-card-title>Statistics</b-card-title>
+            <!-- <b-card-text class="font-small-2 mr-25 mb-0">
+              Updated 1 month ago
+            </b-card-text> -->
+          </b-card-header>
+          <b-card-body class="statistics-body">
+            <b-row>
+              <b-col
+                sm="6"
+                lg="3"
+              >
+                <b-media no-body>
+                  <b-media-aside
+
+                    class="mr-2"
+                  >
+                    <b-avatar
+                      size="48"
+                      variant="light-info"
+                    >
+                      <feather-icon
+                        size="24"
+                        icon="UserIcon"
+                      />
+                    </b-avatar>
+                  </b-media-aside>
+                  <b-media-body class="my-auto">
+                    <h4 class="font-weight-bolder mb-0">
+                      Users
+                    </h4>
+                    <b-card-text class="font-small-3 mb-0">
+                      {{ users.length }}
+                    </b-card-text>
+                  </b-media-body>
+                </b-media>
+              </b-col>
+              <b-col
+                sm="6"
+                lg="3"
+              >
+                <b-media no-body>
+                  <b-media-aside
+
+                    class="mr-2"
+                  >
+                    <b-avatar
+                      size="48"
+                      variant="light-primary"
+                    >
+                      <feather-icon
+                        size="24"
+                        icon="ToolIcon"
+                      />
+                    </b-avatar>
+                  </b-media-aside>
+                  <b-media-body class="my-auto">
+                    <h4 class="font-weight-bolder mb-0">
+                      Services
+                    </h4>
+                    <b-card-text class="font-small-3 mb-0">
+                      {{ users.length }}
+                    </b-card-text>
+                  </b-media-body>
+                </b-media>
+              </b-col>
+              <!-- <b-col
+                v-for="item in data"
+                :key="item.icon"
+                xl="3"
+                sm="6"
+                :class="item.customClass"
+              >
+                <b-media no-body>
+                  <b-media-aside
+
+                    class="mr-2"
+                  >
+                    <b-avatar
+                      size="48"
+                      :variant="item.color"
+                    >
+                      <feather-icon
+                        size="24"
+                        :icon="item.icon"
+                      />
+                    </b-avatar>
+                  </b-media-aside>
+                  <b-media-body class="my-auto">
+                    <h4 class="font-weight-bolder mb-0">
+                      {{ item.title }}
+                    </h4>
+                    <b-card-text class="font-small-3 mb-0">
+                      {{ item.subtitle }}
+                    </b-card-text>
+                  </b-media-body>
+                </b-media>
+              </b-col> -->
+            </b-row>
+          </b-card-body>
+        </b-card>
       </b-col>
     </b-row>
 
@@ -91,10 +196,11 @@
 </template>
 
 <script>
-import { BRow, BCol } from 'bootstrap-vue'
+import {
+  BRow, BCol, BMedia, BMediaAside, BAvatar, BMediaBody, BCard, BCardHeader, BCardTitle, BCardText, BCardBody,
+} from 'bootstrap-vue'
 
-import { getUserData } from '@/auth/utils'
-import EcommerceStatistics from './EcommerceStatistics.vue'
+// import { getUserData } from '@/auth/utils'
 import EcommerceRevenueReport from './EcommerceRevenueReport.vue'
 import EcommerceOrderChart from './EcommerceOrderChart.vue'
 import EcommerceProfitChart from './EcommerceProfitChart.vue'
@@ -109,8 +215,16 @@ export default {
   components: {
     BRow,
     BCol,
+    BMedia,
+    BMediaAside,
+    BAvatar,
+    BMediaBody,
+    BCard,
+    BCardHeader,
+    BCardTitle,
+    BCardText,
+    BCardBody,
 
-    EcommerceStatistics,
     EcommerceRevenueReport,
     EcommerceOrderChart,
     EcommerceProfitChart,
@@ -124,18 +238,22 @@ export default {
   data() {
     return {
       data: {},
+      users: [],
     }
   },
-  created() {
+  async created() {
     // data
     this.$http.get('/ecommerce/data')
       .then(response => {
         this.data = response.data
-
-        // ? Your API will return name of logged in user or you might just directly get name of logged in user
-        // ? This is just for demo purpose
-        const userData = getUserData()
-        this.data.congratulations.name = userData.fullName.split(' ')[0] || userData.username
+      })
+    await this.$http.get('/admin/users')
+      .then(response => {
+        this.users = response.data.data
+        console.log(this.data.users.length)
+      })
+      .catch(error => {
+        console.log(error)
       })
   },
 }

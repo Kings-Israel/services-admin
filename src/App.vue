@@ -120,3 +120,11 @@ export default {
   },
 }
 </script>
+<style>
+/* Change font for site content */
+/* #app {
+  font-family: "Lucida Console", "Courier New", monospace;
+} */
+/* Go to @core/layouts/layouts-vertical/components/vertical-nav-menu/VerticalNavMenu.vue to change font for sidenav */
+/* Go to @core/layouts/components/app-navbar/AppNavbarVerticalLayout.vue to change to header nav */
+</style>

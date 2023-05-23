@@ -50,3 +50,9 @@ export default {
   },
 }
 </script>
+
+<style>
+/* .nav {
+  font-family: "Lucida Console", "Courier New", monospace;
+} */
+</style>

@@ -3,11 +3,11 @@
     <b-row class="auth-inner m-0">
 
       <!-- Brand logo-->
-      <b-link class="brand-logo">
+      <!-- <b-link class="brand-logo">
         <h2 class="brand-text text-primary ml-1">
           Admin
         </h2>
-      </b-link>
+      </b-link> -->
       <!-- /Brand logo-->
 
       <!-- Left Text-->
@@ -143,7 +143,7 @@
 /* eslint-disable global-require */
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import {
-  BRow, BCol, BLink, BFormGroup, BFormInput, BInputGroupAppend, BInputGroup, BCardTitle, BImg, BForm, BButton, BAlert, VBTooltip,
+  BRow, BCol, BFormGroup, BFormInput, BInputGroupAppend, BInputGroup, BCardTitle, BImg, BForm, BButton, BAlert, VBTooltip,
 } from 'bootstrap-vue'
 import useJwt from '@/auth/jwt/useJwt'
 import { required, email } from '@validations'
@@ -158,7 +158,6 @@ export default {
   components: {
     BRow,
     BCol,
-    BLink,
     BFormGroup,
     BFormInput,
     BInputGroupAppend,
@@ -223,6 +222,7 @@ export default {
               })
               user.ability = abilities
               user.role = role
+              console.log(user)
               localStorage.setItem('userData', JSON.stringify(user))
               this.$ability.update(abilities)
 

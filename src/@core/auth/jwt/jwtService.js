@@ -1,4 +1,5 @@
 import jwtDefaultConfig from './jwtDefaultConfig'
+import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default class JwtService {
   // Will be used by this service for making API calls
@@ -38,33 +39,50 @@ export default class JwtService {
       response => response,
       error => {
         // const { config, response: { status } } = error
-        const { config, response } = error
-        const originalRequest = config
+        const { response } = error
+        // const originalRequest = config
 
         // if (status === 401) {
         if (response && response.status === 401) {
-          if (!this.isAlreadyFetchingAccessToken) {
-            this.isAlreadyFetchingAccessToken = true
-            this.refreshToken().then(r => {
-              this.isAlreadyFetchingAccessToken = false
+          // Remove userData from localStorage
+          localStorage.removeItem(this.jwtConfig.storageTokenKeyName)
+          localStorage.removeItem(this.jwtConfig.storageRefreshTokenKeyName)
 
-              // Update accessToken in localStorage
-              this.setToken(r.data.accessToken)
-              this.setRefreshToken(r.data.refreshToken)
+          // Remove userData from localStorage
+          localStorage.removeItem('userData')
+          localStorage.removeItem('permissions')
 
-              this.onAccessTokenFetched(r.data.accessToken)
-            })
-          }
-          const retryOriginalRequest = new Promise(resolve => {
-            this.addSubscriber(accessToken => {
-              // Make sure to assign accessToken according to your response.
-              // Check: https://pixinvent.ticksy.com/ticket/2413870
-              // Change Authorization header
-              originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
-              resolve(this.axiosIns(originalRequest))
-            })
+          this.$toast({
+            component: ToastificationContent,
+            position: 'top-right',
+            props: {
+              title: 'Login to proceed.',
+              icon: 'AlertTriangleIcon',
+              variant: 'danger',
+            },
           })
-          return retryOriginalRequest
+          // if (!this.isAlreadyFetchingAccessToken) {
+          //   this.isAlreadyFetchingAccessToken = true
+          //   this.refreshToken().then(r => {
+          //     this.isAlreadyFetchingAccessToken = false
+
+          //     // Update accessToken in localStorage
+          //     this.setToken(r.data.accessToken)
+          //     this.setRefreshToken(r.data.refreshToken)
+
+          //     this.onAccessTokenFetched(r.data.accessToken)
+          //   })
+          // }
+          // const retryOriginalRequest = new Promise(resolve => {
+          //   this.addSubscriber(accessToken => {
+          //     // Make sure to assign accessToken according to your response.
+          //     // Check: https://pixinvent.ticksy.com/ticket/2413870
+          //     // Change Authorization header
+          //     originalRequest.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
+          //     resolve(this.axiosIns(originalRequest))
+          //   })
+          // })
+          // return retryOriginalRequest
         }
         return Promise.reject(error)
       },
