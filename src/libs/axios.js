@@ -3,7 +3,7 @@ import Vue from 'vue'
 // axios
 import axios from 'axios'
 
-const baseURL = process.env.NODE_ENV === 'development' ? 'http://services.test/api' : 'http://172.104.245.14/services-app/api'
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api' : 'http://172.104.245.14/services-app/api'
 
 const axiosIns = axios.create({
   // You can add your headers here
